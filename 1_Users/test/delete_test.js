@@ -16,7 +16,7 @@ describe('Deleting a user', () => {
 
   it('model instance remove', (done) => {
     //operation to ensure joe is removed
-    joe.remove()
+    joe.deleteOne()
       .then(() => {
         //ensure that Joe does not exist in the collection anymore
         User.findOne({
@@ -33,15 +33,43 @@ describe('Deleting a user', () => {
 
 
   it('class method remove', (done) => {
+    //Remove a bunch of records with criteria
+    User.deleteOne({
+      name: 'Joe'
+    }).then(() => {
+      User.findOne({
+        name: 'Joe'
+      }).then((user) => {
+        assert(user === null)
+      })
+
+    })
     done()
   });
 
-  it('class method findAndRemove', (done) => {
+  it('class method findOneAndRemove', (done) => {
+    User.findOneAndDelete({
+      name: 'Joe'
+    }).then(() => {
+      User.findOne({
+        name: 'Joe'
+      }).then((user) => {
+        assert(user === null)
+      })
+
+    })
     done()
   })
 
   it('class method findByIdAndRemove', (done) => {
-
+    User.findByIdAndDelete(joe._id)
+      .then(() => {
+        User.findOne({
+          name: 'Joe'
+        }).then((user) => {
+          assert(user === null)
+        })
+      })
     done()
 
   })

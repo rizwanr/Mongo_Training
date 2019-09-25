@@ -2,7 +2,10 @@
 const mongoose = require('mongoose');
 //connect to mongodb users_test db - on my present machine, try to find users_test db
 //we do not have to create the db ahead of time
-mongoose.connect('mongodb://localhost/users_test');
+mongoose.connect('mongodb://localhost/users_test', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 //we wait for the connection to setup - once connected 
 //once and on are event handlers
 //once - watch for mongoose to emit an event for open one time and run the function
