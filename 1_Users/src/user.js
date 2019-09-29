@@ -4,7 +4,18 @@ const Schema = mongoose.Schema;
 //schema is small portion of the User MODEL
 const UserSchema = new Schema({
   //String is the global variable to javascript and not mongoose
-  name: String
+  name: {
+    type: String,
+    //pass in the validate object
+    validate: {
+      validator: (name) => name.length > 2,
+      message: "Name must be longer than  2 characters"
+    },
+    required: [true, 'Name is required.'],
+
+  },
+  postCount: Number,
+
 
 
 })

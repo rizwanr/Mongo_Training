@@ -47,19 +47,19 @@ describe('Deleting a user', () => {
     done()
   });
 
-  it('class method findOneAndRemove', (done) => {
-    User.findOneAndDelete({
-      name: 'Joe'
-    }).then(() => {
-      User.findOne({
-        name: 'Joe'
-      }).then((user) => {
-        assert(user === null)
-      })
+  // it('class method findOneAndRemove', (done) => {
+  //   User.findOneAndDelete({
+  //     name: 'Joe'
+  //   }).then(() => {
+  //     User.findOne({
+  //       name: 'Joe'
+  //     }).then((user) => {
+  //       assert(user === null)
+  //     })
 
-    })
-    done()
-  })
+  //   })
+  //   done()
+  // })
 
   it('class method findByIdAndRemove', (done) => {
     User.findByIdAndDelete(joe._id)

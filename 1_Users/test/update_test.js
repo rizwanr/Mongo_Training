@@ -6,7 +6,8 @@ describe('Updating a user', () => {
 
   beforeEach((done) => {
     joe = new User({
-      name: 'Joe'
+      name: 'Joe',
+      postCount: 0
     });
     joe.save().then(() => {
       done()
@@ -73,6 +74,24 @@ describe('Updating a user', () => {
         name: 'Alex'
       }), done
     )
+  })
+
+  //start of Mongo Update modifiers
+  it('user can have their post count incremented by 1 ', (done) => {
+    //update the user Joe 
+    User.update({
+      name: 'Joe'
+    }, {
+      //increment by 1
+      $inc: {
+        postCount: 1
+      }
+    }).then(() => User.findOne({
+      'name': 'Joe'
+    })).then((user) => {
+      assert(user.postCount === 1)
+      done()
+    })
   })
 
 })
